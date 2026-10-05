@@ -91,8 +91,8 @@ public class LeaderboardController {
     @GetMapping("/players/{username}/history")
     public List<Map<String, Object>> history(@PathVariable String username,
                                              @RequestParam(required = false) String mode,
-                                             @RequestParam(defaultValue = "50") int limit) {
-        int n = Math.max(1, Math.min(limit, 500));
+                                             @RequestParam(defaultValue = "10") int limit) {
+        int n = Math.max(1, Math.min(limit, 50));
         String base = "SELECT h.mode, h.rating, h.delta, h.source, h.created_at FROM score_history h "
                 + "JOIN players p ON p.id = h.player_id WHERE lower(p.username) = lower(?) ";
         if (mode != null && !mode.isBlank()) {

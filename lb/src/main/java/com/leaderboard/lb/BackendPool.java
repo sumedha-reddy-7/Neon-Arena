@@ -50,7 +50,7 @@ public class BackendPool {
         return best;
     }
 
-    @Scheduled(fixedDelay = 5000)
+    @Scheduled(fixedDelay = 30000)
     public void check() {
         for (Backend b : backends) {
             boolean ok = false;

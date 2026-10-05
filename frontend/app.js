@@ -134,7 +134,7 @@
   async function loadInitial() {
     for (const mode of MODES) {
       try {
-        const r = await fetch(`/api/leaderboard/${mode}?limit=50`);
+        const r = await fetch(`/api/leaderboard/${mode}?limit=10`);
         if (r.ok && !state.data[mode]) onSnapshot(await r.json());
       } catch (_) { /* websocket will fill in */ }
     }
@@ -193,7 +193,7 @@
     const v = $('#find-input').value.trim();
     if (v) findMe(v, false);
   });
-  setInterval(() => { if (state.me) findMe(state.me, true); }, 4000);
+  setInterval(() => { if (state.me) findMe(state.me, true); }, 30000);
 
   /* ---------- toast + confetti ---------- */
   let toastTimer;

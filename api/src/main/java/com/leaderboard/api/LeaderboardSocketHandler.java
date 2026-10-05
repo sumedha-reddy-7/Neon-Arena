@@ -60,7 +60,7 @@ public class LeaderboardSocketHandler extends TextWebSocketHandler {
         if (ScoreService.MODES.contains(mode)) dirty.add(mode);
     }
 
-    @Scheduled(fixedDelay = 400)
+    @Scheduled(fixedDelay = 5000)
     public void flush() {
         if (sessions.isEmpty()) {
             dirty.clear();
@@ -72,7 +72,7 @@ public class LeaderboardSocketHandler extends TextWebSocketHandler {
         }
     }
 
-    @Scheduled(fixedDelay = 15000)
+    @Scheduled(fixedDelay = 30000)
     public void heartbeat() {
         broadcast("{\"type\":\"ping\"}");
     }
@@ -84,7 +84,7 @@ public class LeaderboardSocketHandler extends TextWebSocketHandler {
                     "mode", mode,
                     "ts", System.currentTimeMillis(),
                     "instance", instanceId,
-                    "entries", ranking.top(mode, 50)));
+                    "entries", ranking.top(mode, 10)));
         } catch (JsonProcessingException e) {
             throw new IllegalStateException(e);
         }
